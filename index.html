@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Birthday Tayyaba 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ==== BASIC ==== */
+body{margin:0;font-family:"Poppins",sans-serif;background:linear-gradient(135deg,#ff9aa2,#ffb6b9,#fae3d9);color:#222;overflow-x:hidden}
+.container{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:100vh;padding:20px}
+
+/* ==== CARD ==== */
+.card{background:rgba(255,255,255,0.85);backdrop-filter:blur(10px);border-radius:20px;padding:30px;max-width:600px;box-shadow:0 10px 40px rgba(0,0,0,.15);animation:float 4s ease-in-out infinite alternate}
+@keyframes float{0%{transform:translateY(0)}100%{transform:translateY(-10px)}}
+
+/* ==== TYPOGRAPHY ==== */
+h1{font-family:"Pacifico",cursive;font-size:52px;color:#ff6b6b;text-shadow:2px 3px 8px rgba(0,0,0,.1)}
+p{font-size:18px;line-height:1.6;margin-top:10px}
+
+/* ==== BUTTONS ==== */
+.btn{background:linear-gradient(90deg,#ff9aa2,#ffd166);border:none;border-radius:25px;padding:12px 25px;margin-top:20px;font-weight:600;cursor:pointer;color:#fff;box-shadow:0 8px 25px rgba(0,0,0,.2);transition:.3s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.25)}
+
+/* ==== SLIDER ==== */
+.slider{width:90%;max-width:600px;overflow:hidden;margin:40px auto;border-radius:20px;background:rgba(255,255,255,.4);backdrop-filter:blur(10px);padding:20px;position:relative}
+.slide{display:none;font-size:20px;font-weight:500;color:#333}
+.slide.active{display:block;animation:fadeIn 1.2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ==== CONFETTI ==== */
+.confetti{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:100}
+.confetti span{position:absolute;width:8px;height:15px;opacity:.9;background:#ff6b6b;animation:fall linear infinite}
+@keyframes fall{0%{transform:translateY(-10%) rotate(0deg)}100%{transform:translateY(110vh) rotate(720deg)}}
+
+/* ==== FOOTER ==== */
+footer{margin-top:30px;font-size:14px;color:#444;opacity:.8}
+
+/* ==== RESPONSIVE ==== */
+@media (max-width:480px){
+  h1{font-size:38px}
+  .card{padding:20px}
+  .slider{font-size:18px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <h1>Happy Birthday 🎉</h1>
+    <p>Dear <strong>Tayyaba</strong>,<br>
+    Wishing you a day full of joy, laughter, and sweet memories.  
+    May your year ahead be bright, successful, and filled with happiness 💖</p>
+    <button class="btn" id="musicBtn">Play Music 🎵</button>
+    <button class="btn" id="confettiBtn">Confetti 🎉</button>
+  </div>
+
+  <!-- Slider -->
+  <div class="slider" id="slider">
+    <div class="slide active">🎂 “Count your life by smiles, not tears. Count your age by friends, not years.”</div>
+    <div class="slide">💖 “Another adventure-filled year awaits you. Happy Birthday!”</div>
+    <div class="slide">🌸 “May your day be as beautiful as your smile.”</div>
+    <div class="slide">🎁 “You’re not getting older, you’re getting better!”</div>
+    <div class="slide">✨ “Wishing you sunshine, laughter, and endless love today and always.”</div>
+  </div>
+
+  <footer>Made with 💗 by your friend — Zeeshan</footer>
+</div>
+
+<audio id="birthdayMusic" loop autoplay>
+  <source src="happy-birthday.mp3" type="audio/mpeg">
+</audio>
+
+<div class="confetti" id="confetti"></div>
+
+<script>
+// ---------- MUSIC ----------
+const music = document.getElementById('birthdayMusic');
+const musicBtn = document.getElementById('musicBtn');
+let isPlaying = true;   // starts automatically
+
+musicBtn.addEventListener('click', () => {
+  if (isPlaying) {
+    music.pause();
+    isPlaying = false;
+    musicBtn.textContent = 'Play Music 🎵';
+  } else {
+    music.play();
+    isPlaying = true;
+    musicBtn.textContent = 'Pause Music ⏸️';
+  }
+});
+
+// ---------- CONFETTI ----------
+const confettiContainer = document.getElementById('confetti');
+const colors = ['#ff6b6b','#ffd166','#9be7ff','#a0f0a6','#d8b4ff','#ff9aa2'];
+
+function launchConfetti() {
+  for (let i = 0; i < 100; i++) {
+    const s = document.createElement('span');
+    s.style.background = colors[Math.floor(Math.random()*colors.length)];
+    s.style.left = Math.random()*100 + '%';
+    s.style.animationDuration = 2 + Math.random()*3 + 's';
+    s.style.width = 6 + Math.random()*6 + 'px';
+    s.style.height = 12 + Math.random()*8 + 'px';
+    confettiContainer.appendChild(s);
+    setTimeout(() => s.remove(), 5000);
+  }
+}
+
+// Auto‑launch every 5 seconds
+setInterval(launchConfetti, 5000);
+// First burst on load
+launchConfetti();
+
+// Manual button (still works)
+document.getElementById('confettiBtn').addEventListener('click', launchConfetti);
+
+// ---------- SLIDER ----------
+const slides = document.querySelectorAll('.slide');
+let currentSlide = 0;
+setInterval(() => {
+  slides[currentSlide].classList.remove('active');
+  currentSlide = (currentSlide + 1) % slides.length;
+  slides[currentSlide].classList.add('active');
+}, 4000);
+</script>
+</body>
+</html>
